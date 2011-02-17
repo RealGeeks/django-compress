@@ -28,7 +28,7 @@ def render_common(obj, filename, version):
     if filename.startswith('http://'):
         context['url'] = filename
     else:
-        context['url'] = compress_url(filename, prefix)
+        context['url'] = compress_url(filename, prefix, version)
         
     return obj['template'].render(context)
 

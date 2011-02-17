@@ -77,10 +77,13 @@ def compress_source(filename):
     """
     return os.path.join(settings.COMPRESS_SOURCE, filename)
     
-def compress_url(url, prefix=None):
+def compress_url(url, prefix=None, version=None):
+    ret = urlquote(url)
+    if settings.COMPRESS_VERSION_QUERYSTRING and version is not None:
+        ret = ret + '?' + settings.COMPRESS_VERSION_QUERYSTRING_VAR + '=' + version
     if prefix:
-        return prefix + urlquote(url)
-    return settings.COMPRESS_URL + urlquote(url)
+        return prefix + ret
+    return settings.COMPRESS_URL + ret
 
 def concat(filenames, separator=''):
     """
